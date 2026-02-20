@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rastrear Pedido</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/png">
 </head>
 
 <body>
@@ -20,18 +19,18 @@
     <h1>Acompanhe seu pedido</h1>
     <p>Digite o número da <strong>nota fiscal</strong> para acompanhar a entrega</p>
   
-  
-    <form class="form-consulta">
+      <form  class="form-consulta" id="form-consulta">
         <label for="nf">Número da Nota Fiscal:</label>
 
-        <input type="text" id="nf" name="nf" placeholder="Ex: 123" >
+        <input type="text" id="nf" name="nf" placeholder="Ex: 123" required >
 
-        <a href="resultado.html">Consultar</a>
-    </form>
+        <button type="submit">Consultar</button>
+      </form>
 
   </main>
-  <a href="erro.html">erro teste</a>
-  <footer class="footer"> <p>&copy; 2026 - Medynova Medicamentos Especiais </p></footer>
+  <footer> <p>&copy; 2026 - Medynova Medicamentos Especiais </p></footer>
+
+  <script src="js/app.js"></script>
 
 </body>
 </html>
