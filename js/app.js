@@ -6,7 +6,13 @@ form.addEventListener('submit', async function (e) {
     const nf = document.getElementById('nf').value;
 
     try {
-        const response = await fetch(`/api/consulta?chave=${nf}`);
+        const response = await fetch('/api/consulta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ chavenf: nf })
+        });
         const data = await response.json();
 
         if (!response.ok) {
