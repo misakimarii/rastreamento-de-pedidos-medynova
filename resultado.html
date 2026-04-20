@@ -20,23 +20,21 @@
   <main class="container">
     <div class="card">
         <h2>Seu pedido está a caminho</h2>
-        <h3>Previsão de entrega: <strong>03/02</strong></h3>
+        <p id="previsao" style="font-weight: bold;"></p>
 
         <div class="status-timeline etapa-2">
 
-          <div class="status-step ativo">
+          <div class="status-step inativo">
               <img src="assets/icons/icons8-box-100.png" alt="Pedido coletado">
               <p class="status-titulo">Pedido coletado</p>
-              <p class="status-local"> Cidade <br> -<br> UF</p>
               <p class="status-data">00/00/2020 <br> 00:00</p>
           </div>
           
           
 
-          <div class="status-step ativo">
+          <div class="status-step inativo">
             <img src="assets/icons/caminhão.png" alt="Em transporte">
             <p class="status-titulo">Em transporte</p>
-            <p class="status-local"> Cidade <br> -<br> UF</p>
             <p class="status-data">00/00/2020 <br> 00:00</p>
           </div>
 
@@ -45,7 +43,6 @@
           <div class="status-step inativo">
             <img src="assets/icons/carrinho-de-mão.png" alt="Saiu para entrega">
             <p class="status-titulo">Saiu para entrega</p>
-            <p class="status-local"> Cidade <br> -<br> UF</p>
             <p class="status-data">00/00/2020 <br> 00:00</p>
           </div>
 
@@ -54,7 +51,6 @@
           <div class="status-step inativo">
             <img src="assets/icons/concluído.png" alt="Entrega concluída">
             <p class="status-titulo">Entrega concluída</p>
-            <p class="status-local"> Cidade <br> -<br> UF</p>
             <p class="status-data">00/00/2020 <br> 00:00</p>
           </div>
           
@@ -66,6 +62,7 @@
   </main>
 
   <footer> <p>&copy; 2026 - Medynova Medicamentos Especiais </p></footer>
+  <script src="js/resultado.js"></script>
 
 </body>
 </html>

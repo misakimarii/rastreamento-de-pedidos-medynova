@@ -1,25 +1,16 @@
-# =====================================
-# 🔐 ARQUIVOS SENSÍVEIS - NUNCA COMMITAR
-# =====================================
-
-# Variáveis de ambiente
 .env
 .env.local
 .env.*.local
 .env.production
 
-# Banco de dados
 *.db
 *.sqlite
 *.sqlite3
 rastreamento.db
 
-# =====================================
-# 📦 CACHE PYTHON
-# =====================================
-
 __pycache__/
 *.py[cod]
+*.pyc
 *$py.class
 *.so
 
@@ -43,19 +34,11 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# =====================================
-# 🔧 AMBIENTES VIRTUAIS
-# =====================================
-
 venv/
 ENV/
 env/
 env.bak/
 venv.bak/
-
-# =====================================
-# 💻 IDE E EDITOR
-# =====================================
 
 .vscode/
 .idea/
@@ -67,10 +50,6 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 
-# =====================================
-# 🧪 TESTES
-# =====================================
-
 .pytest_cache/
 .coverage
 htmlcov/
@@ -80,24 +59,19 @@ coverage.xml
 *.cover
 *.py,cover
 
-# =====================================
-# 📝 LOGS
-# =====================================
-
 *.log
 logs/
 debug.log
-
-# =====================================
-# 📂 TEMPORÁRIOS
-# =====================================
 
 .tmp/
 tmp/
 temp/
 *.tmp
 *.temp
+*.bak
 
-# planilhas processadas (dados temporários)
 planilhas/processados/
 planilhas/*.csv
+
+backend/planilhas/*
+!backend/planilhas/.gitkeep
