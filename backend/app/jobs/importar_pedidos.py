@@ -2,34 +2,36 @@ import os
 from app.services.importar_planilha import importar_planilha
 from app.services.salvar_pedidos import salvar_pedidos
 
-PASTA = "planilhas"
-
 
 def importar_pedidos():
+    print("🔍 Procurando arquivos CSV...")
 
-    print(" Verificando planilhas...")
+    pasta = "planilhas"
 
-    arquivos = os.listdir(PASTA)
+    if not os.path.exists(pasta):
+        print(" Pasta de planilhas não encontrada")
+        return
 
-    for arquivo in arquivos:
+    arquivos = os.listdir(pasta)
 
-        if not arquivo.endswith(".csv"):
-            continue
+    csvs = [f for f in arquivos if f.lower().endswith(".csv")]
 
-        caminho = os.path.join(PASTA, arquivo)
+    if not csvs:
+        print(" Nenhum CSV encontrado")
+        return
+
+    for arquivo in csvs:
+        caminho = os.path.join(pasta, arquivo)
 
         print(f" Importando: {arquivo}")
 
-        df = importar_planilha(caminho)
-        salvar_pedidos(df)
+        try:
+            df = importar_planilha(caminho)
 
-        pasta_processados = os.path.join(PASTA, "processados")
+            if df is None:
+                continue
 
-        if not os.path.exists(pasta_processados):
-            os.makedirs(pasta_processados)
+            salvar_pedidos(df)
 
-        novo_caminho = os.path.join(pasta_processados, arquivo)
-
-        os.rename(caminho, novo_caminho)
-
-        print(f" {arquivo} movido para processados")
+        except Exception as e:
+            print(f" Erro ao importar {arquivo}: {e}")

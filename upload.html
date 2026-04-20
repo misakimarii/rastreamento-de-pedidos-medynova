@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Planilha</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo/logo.png" alt="Logo da empresa">
+    </header>
+
+    <main class="container-1 container-upload">
+        <h1>Atualizar planilha</h1>
+        <p>Envie um novo arquivo CSV para substituir a planilha atual do sistema.</p>
+
+        <div class="upload-card">
+            <div id="drop-area" class="drop-area" tabindex="0">
+                <input type="file" id="fileInput" accept=".csv" hidden>
+
+                <div class="drop-content">
+                    <p class="drop-title">Arraste o arquivo CSV aqui</p>
+                    <p class="drop-subtitle">ou clique para selecionar</p>
+                    <span class="drop-file-name" id="file-name">Nenhum arquivo selecionado</span>
+                </div>
+            </div>
+
+            <button type="button" id="btn-enviar">Enviar planilha</button>
+            <p id="upload-msg" class="upload-msg"></p>
+        </div>
+
+        <div class="upload-actions">
+            <a href="index.html" class="btn-voltar">Voltar</a>
+            <button id="btn-logout" type="button" class="btn-logout">Sair</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Medynova Medicamentos Especiais</p>
+    </footer>
+
+    <script src="js/upload.js"></script>
+</body>
+</html>

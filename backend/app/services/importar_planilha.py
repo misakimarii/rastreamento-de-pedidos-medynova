@@ -1,32 +1,32 @@
 import pandas as pd
 
+
 def importar_planilha(caminho):
-    with open(caminho, "r", encoding="cp1252") as f:
-        linhas = f.readlines()
+    try:
+        print(f"📄 Lendo arquivo: {caminho}")
 
-    inicio = 0
-    for i, linha in enumerate(linhas):
-        if "Cli_For" in linha:
-            inicio = i
-            break
+        df = pd.read_csv(
+            caminho,
+            sep=";",
+            encoding="latin-1",
+            skiprows=2,
+            dtype=str  
+        )
 
-    df = pd.read_csv(
-        caminho,
-        sep=";",
-        dtype=str,
-        encoding="cp1252",
-        skiprows=inicio,
-        engine="python",
-        on_bad_lines="skip"
-    )
+        df = df.dropna(how="all")
 
-    df.columns = df.columns.str.encode('latin1').str.decode('utf-8')
-    df.columns = df.columns.str.replace("C�digo", "Codigo")
+        df = df.fillna("")
 
-    df = df[df["Numero"].str.isnumeric()]
-    df = df.reset_index(drop=True)
-    df = df.fillna("")
+        df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
-    print(f"✅ {len(df)} registros carregados")
+        df = df[df["Numero"] != ""]
 
-    return df
+        df = df[~df["Numero"].str.contains("TOTAL", na=False)]
+
+        print(f"{len(df)} registros carregados")
+
+        return df
+
+    except Exception as e:
+        print(f"Erro ao ler CSV: {e}")
+        return None

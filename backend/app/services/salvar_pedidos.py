@@ -1,24 +1,26 @@
 from app.database import SessionLocal
 from app.models.pedido import Pedido
-
-
-def normalizar(valor):
-    if not valor:
-        return ""
-    return str(valor).strip().lstrip("0")
+from app.utils.normalizador import normalizar_numero_nf
 
 
 def salvar_pedidos(df):
-    db = SessionLocal()
+    if df is None:
+        print("DataFrame vazio")
+        return
 
+    db = SessionLocal()
     novos = 0
 
     for _, row in df.iterrows():
 
-        numero_nf = normalizar(row.get("Numero"))
-        chave = normalizar(row.get("Chave NF-e"))
+        chave = str(row.get("Chave NF-e", "")).strip()
 
-        if not numero_nf or not chave:
+        if not chave:
+            continue
+
+        numero_nf = normalizar_numero_nf(row.get("Numero", ""))
+
+        if not numero_nf:
             continue
 
         existe = db.query(Pedido).filter(
@@ -26,14 +28,15 @@ def salvar_pedidos(df):
         ).first()
 
         if existe:
+            print(f"Pedido {numero_nf} já existe, ignorando...")
             continue
 
         try:
             pedido = Pedido(
                 numero_nf=numero_nf,
                 chave_nfe=chave,
-                cidade=(row.get("Cliente/Fornecedor") or "").strip(),
-                uf=(row.get("UF") or "").strip()
+                cidade=str(row.get("Cliente/Fornecedor", "")),
+                uf=str(row.get("UF", ""))
             )
 
             db.add(pedido)
@@ -41,10 +44,9 @@ def salvar_pedidos(df):
             novos += 1
 
         except Exception as e:
+            print(f"Erro ao salvar pedido {numero_nf}: {e}")
             db.rollback()
-            print("Erro ao salvar:", e)
-            continue
 
     db.close()
 
-    print(f" {novos} novos pedidos salvos!")
+    print(f"{novos} novos pedidos salvos!")

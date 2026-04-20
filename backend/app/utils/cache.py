@@ -19,7 +19,7 @@ def get_cache(numero_nf):
 
 
 def set_cache(numero_nf, data):
-    cache_rastreamento[numero_nf] = {
-        "data": data,
-        "timestamp": datetime.now()
-    }
+     cache_rastreamento[numero_nf] = {
+         "data": data,
+         "timestamp": datetime.now()
+     }

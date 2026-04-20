@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrativo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo/logo.png" alt="Logo da empresa">
+    </header>
+
+    <main class="container-1">
+        <h1>Área administrativa</h1>
+        <p>Faça login para acessar o envio de planilhas.</p>
+
+        <div class="card">
+            <form id="admin-login-form" class="form-consulta">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" required>
+
+                <label for="password">Senha</label>
+                <input type="password" id="password" required>
+
+                <button type="submit">Entrar</button>
+                <p id="login-msg"></p>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        Sistema de rastreamento de pedidos
+    </footer>
+
+    <script src="js/admin-login.js"></script>
+</body>
+</html>
