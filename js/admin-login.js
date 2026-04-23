@@ -1,6 +1,19 @@
 const form = document.getElementById("admin-login-form");
 const loginMsg = document.getElementById("login-msg");
 
+function getApiBase() {
+    const isArquivoLocal = window.location.protocol === "file:";
+    const isLocalhost = ["127.0.0.1", "localhost"].includes(window.location.hostname);
+
+    if (isArquivoLocal || isLocalhost) {
+        return "http://127.0.0.1:8000";
+    }
+
+    return "";
+}
+
+const API_BASE = getApiBase();
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -10,7 +23,7 @@ form.addEventListener("submit", async (e) => {
     loginMsg.textContent = "";
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/admin/login", {
+        const response = await fetch(`${API_BASE}/admin/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

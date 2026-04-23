@@ -4,11 +4,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fileName = document.getElementById("file-name");
     const btnEnviar = document.getElementById("btn-enviar");
     const uploadMsg = document.getElementById("upload-msg");
+    const btnLogout = document.getElementById("btn-logout");
 
     let arquivoSelecionado = null;
 
+    function getApiBase() {
+        const isArquivoLocal = window.location.protocol === "file:";
+        const isLocalhost = ["127.0.0.1", "localhost"].includes(window.location.hostname);
+
+        if (isArquivoLocal || isLocalhost) {
+            return "http://127.0.0.1:8000";
+        }
+
+        return "";
+    }
+
+    const API_BASE = getApiBase();
+
     try {
-        const authResponse = await fetch("http://127.0.0.1:8000/admin/me", {
+        const authResponse = await fetch(`${API_BASE}/admin/me`, {
             method: "GET",
             credentials: "include"
         });
@@ -108,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         uploadMsg.className = "upload-msg";
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/upload-planilha", {
+            const response = await fetch(`${API_BASE}/upload-planilha`, {
                 method: "POST",
                 credentials: "include",
                 body: formData
@@ -155,17 +169,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             btnEnviar.textContent = "Enviar planilha";
         }
     }
-});
 
-const btnLogout = document.getElementById("btn-logout");
+    if (btnLogout) {
+        btnLogout.addEventListener("click", async () => {
+            try {
+                await fetch(`${API_BASE}/admin/logout`, {
+                    method: "POST",
+                    credentials: "include"
+                });
+            } catch (error) {
+                console.error("ERRO LOGOUT:", error);
+            }
 
-if (btnLogout) {
-    btnLogout.addEventListener("click", async () => {
-        await fetch("http://127.0.0.1:8000/admin/logout", {
-            method: "POST",
-            credentials: "include"
+            window.location.href = "admin-login.html";
         });
-
-        window.location.href = "admin-login.html";
-    });
-}
+    }
+});

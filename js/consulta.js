@@ -1,22 +1,28 @@
 const form = document.getElementById('form-consulta');
 
+function getApiBase() {
+    const isArquivoLocal = window.location.protocol === "file:";
+    const isLocalhost = ["127.0.0.1", "localhost"].includes(window.location.hostname);
+
+    if (isArquivoLocal || isLocalhost) {
+        return "http://127.0.0.1:8000";
+    }
+
+    return "";
+}
+
+const API_BASE = getApiBase();
+
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const nf = document.getElementById('nf').value.trim();
-
-    if (!nf) {
-        window.location.href = 'erro.html';
-        return;
-    }
+    const nf = document.getElementById('nf').value;
 
     try {
-        const response = await fetch(`http://127.0.0.1:8000/rastreamento/${nf}`);
+        const response = await fetch(`${API_BASE}/rastreamento/${nf}`);
         const data = await response.json();
 
-        console.log("RESPOSTA BACKEND:", data);
-
-        if (!response.ok || data.erro) {
+        if (!response.ok || data.erro || !data.eventos) {
             window.location.href = 'erro.html';
             return;
         }
@@ -25,7 +31,6 @@ form.addEventListener('submit', async function (e) {
         window.location.href = 'resultado.html';
 
     } catch (error) {
-        console.error("ERRO NA CONSULTA:", error);
         window.location.href = 'erro.html';
     }
 });
