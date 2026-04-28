@@ -91,7 +91,7 @@ rastreamento-de-pedidos/
 ## 1. Clone o projeto
 
 ```bash
-git clone https://github.com/misakimarii/seu-repositorio.git
+git clone https://github.com/misakimarii/rastreamento-de-pedidos-medynova.git
 cd rastreamento-de-pedidos
 ```
 
